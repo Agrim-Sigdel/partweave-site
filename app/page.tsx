@@ -16,7 +16,7 @@ const PRINCIPLES = [
   },
   {
     label: "Agent-native",
-    body: "Every command speaks --json: stable exit codes, a versioned envelope, a live catalog via explore --json. Built to be driven by an AI agent as readily as a terminal.",
+    body: "create, add, list, explore, and plan all speak --json: stable exit codes, a versioned envelope, a live catalog via explore --json. Built to be driven by an AI agent as readily as a terminal.",
   },
   {
     label: "Deterministic wiring",
@@ -43,7 +43,7 @@ export default function HomePage() {
             ownable code. Nothing hidden behind a runtime.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <CopyCommand command="npx create-partweave@latest my-app" />
+            <CopyCommand command="npx partweave@latest my-app" />
           </div>
           <div className="flex gap-3">
             <Link href="/docs" className={buttonVariants({ variant: "primary" })}>
@@ -67,7 +67,7 @@ export default function HomePage() {
             <span className="h-2.5 w-2.5 rounded-full border border-line" />
           </div>
           <p>
-            <span className="text-ink-dim">$ </span>npx create-partweave@latest my-app
+            <span className="text-ink-dim">$ </span>npx partweave@latest my-app
           </p>
           <p className="text-ink-dim">◇ Which apps? server, web, mobile</p>
           <p className="text-ink-dim">◇ Components? auth, docker, ci</p>
@@ -117,8 +117,9 @@ export default function HomePage() {
               What's real today
             </h2>
             <p className="mt-2 max-w-lg text-sm leading-relaxed text-ink-dim">
-              <span className="font-semibold text-ink">7</span> components ship as real,
-              generated code (auth, storage, db-postgres, docker, ci, example, feedback).{" "}
+              <span className="font-semibold text-ink">8</span> components ship as real,
+              generated code (auth, storage, db-postgres, docker, ci, example, feedback,
+              ui-kit).{" "}
               <span className="font-semibold text-ink">4</span> more have a full spec drafted
               and are waiting to be built (rbac, rate-limit, audit-log, workflow-engine). See
               the catalog for what's next.
