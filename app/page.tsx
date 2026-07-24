@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CopyCommand } from "@/components/site/copy-command";
+import { CliWalkthrough } from "@/components/site/cli-walkthrough";
 
 const PRINCIPLES = [
   {
@@ -96,6 +97,15 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+      </Container>
+
+      <div className="selvage" />
+
+      <Container className="py-20">
+        <h2 className="mb-10 font-mono text-xs uppercase tracking-wider text-ink-dim">
+          See it in action
+        </h2>
+        <CliWalkthrough />
       </Container>
 
       <div className="selvage" />
