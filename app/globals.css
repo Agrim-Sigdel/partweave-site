@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens — "indigo dye & gold thread": partweave weaves separate
+ * codebases (server/web/mobile) into one repo, so the palette is drawn from
+ * actual weaving materials rather than a generic brand blue. Indigo is the
+ * oldest textile dye there is; gold thread is what marks the parts worth
+ * noticing in a woven piece — used sparingly here for the same reason.
+ *
+ * Token-level dark mode per the house design process: redefine the same
+ * custom properties under prefers-color-scheme and under the explicit
+ * [data-theme] override so the manual toggle always wins over the OS.
+ */
+:root {
+  --canvas: #f6f1e4; /* unbleached linen */
+  --canvas-raised: #efe7d6;
+  --ink: #14172b; /* indigo-black */
+  --ink-dim: #4a4e6b;
+  --accent: #33418f; /* indigo dye */
+  --accent-2: #7d5c1a; /* gold thread, sparing use only. Darkened from #b9862f: at the
+    original value this read at 2.86:1 against --canvas as text (fails WCAG AA's 4.5:1) -
+    verified by computing relative luminance for both, not by eye. */
+  --line: #dcd2b8; /* warm hairline, not neutral grey */
+  --ok: #3f7d4f;
+  --warn: #8a5a1a; /* darkened alongside accent-2 for the same text-contrast reason */
+  --danger: #a13f3f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #14172b;
+    --canvas-raised: #1d2140;
+    --ink: #ece7d8;
+    --ink-dim: #a8acc9;
+    --accent: #8b9af0;
+    --accent-2: #e0b15c;
+    --line: #2c3057;
+    --ok: #6fbf82;
+    --warn: #dba24d;
+    --danger: #e0716f;
+  }
+}
+
+:root[data-theme="dark"] {
+  --canvas: #14172b;
+  --canvas-raised: #1d2140;
+  --ink: #ece7d8;
+  --ink-dim: #a8acc9;
+  --accent: #8b9af0;
+  --accent-2: #e0b15c;
+  --line: #2c3057;
+  --ok: #6fbf82;
+  --warn: #dba24d;
+  --danger: #e0716f;
+}
+
+:root[data-theme="light"] {
+  --canvas: #f6f1e4;
+  --canvas-raised: #efe7d6;
+  --ink: #14172b;
+  --ink-dim: #4a4e6b;
+  --accent: #33418f;
+  --accent-2: #b9862f;
+  --line: #dcd2b8;
+  --ok: #3f7d4f;
+  --warn: #a86a1f;
+  --danger: #a13f3f;
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  color-scheme: light dark;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--canvas);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+  font-family: var(--font-mono);
+}
+
+/*
+ * The "selvage" rule — a hairline divider with small perpendicular ticks at
+ * a regular interval, standing in for the finished edge of a woven cloth.
+ * Used between major sections instead of a plain <hr>.
+ */
+.selvage {
+  position: relative;
+  height: 1px;
+  background: var(--line);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--line) 0,
+    var(--line) 1px,
+    transparent 1px,
+    transparent 24px
+  );
+}
+.selvage::before {
+  content: "";
+  position: absolute;
+  inset: -3px 0 auto 0;
+  height: 7px;
+  background-image: repeating-linear-gradient(to right, var(--accent-2) 0, var(--accent-2) 1px, transparent 1px, transparent 24px);
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up {
+    animation: fade-up 500ms ease-out both;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Syntax highlighting — mapped to the same tokens (rehype-highlight classes). */
+.hljs-keyword,
+.hljs-built_in {
+  color: var(--accent);
+}
+.hljs-string,
+.hljs-attr {
+  color: var(--accent-2);
+}
+.hljs-comment {
+  color: var(--ink-dim);
+  font-style: italic;
+}
+.hljs-number,
+.hljs-literal {
+  color: var(--ok);
+}
+.hljs-title,
+.hljs-function,
+.hljs-name {
+  color: var(--ink);
+  font-weight: 600;
+}
+.hljs-deletion {
+  color: var(--danger);
+}
+.hljs-addition {
+  color: var(--ok);
+}
+
+table {
+  font-variant-numeric: tabular-nums;
+}
