@@ -8,10 +8,12 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 
 /**
- * Renders the project's real docs/*.md — no duplicated content, the site
- * reads straight from the same files a contributor edits. Curated order for
- * the sidebar; anything dropped into docs/ later that isn't in this list
- * still shows up, alphabetically, after it.
+ * Renders content/docs/*.md, a copy of the partweave repo's docs/*.md kept
+ * in this repo so the site builds standalone (this repo is deployed on its
+ * own, with no sibling checkout of the partweave repo available). Re-sync
+ * by hand when the source docs change: cp ../base/docs/*.md content/docs/.
+ * Curated order for the sidebar; anything dropped into content/docs/ later
+ * that isn't in this list still shows up, alphabetically, after it.
  */
 const CURATED_ORDER = [
   "creating-projects",
@@ -21,7 +23,7 @@ const CURATED_ORDER = [
   "independent-workflows",
 ];
 
-const DOCS_DIR = path.join(process.cwd(), "..", "..", "docs");
+const DOCS_DIR = path.join(process.cwd(), "content", "docs");
 
 export interface DocMeta {
   slug: string;
